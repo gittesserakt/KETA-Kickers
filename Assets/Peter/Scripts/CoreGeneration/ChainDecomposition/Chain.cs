@@ -10,29 +10,29 @@ public class Chain<TNode>
     /// <summary>
     /// Nodes in the chain.
     /// </summary>
-    public List<TNode> nodes { get; }
+    public List<TNode> Nodes { get; }
 
     /// <summary>
     /// Number of the chain.
     /// </summary>
-    public int number { get; }
+    public int Number { get; }
 
     /// <summary>
     /// Whether it was created from a face or from an acyclic component.
     /// </summary>
-    public bool isFromFace { get; set; }
+    public bool IsFromFace { get; set; }
 
     public Chain(List<TNode> nodes, int number)
     {
-        this.nodes = nodes;
-        this.number = number;
+        this.Nodes = nodes;
+        this.Number = number;
     }
 
     #region Equals
 
     protected bool Equals(Chain<TNode> other)
     {
-        return nodes.SequenceEqual(other.nodes) && number == other.number;
+        return Nodes.SequenceEqual(other.Nodes) && Number == other.Number;
     }
 
     public override bool Equals(object obj)
@@ -56,7 +56,7 @@ public class Chain<TNode>
     {
         unchecked
         {
-            return ((nodes != null ? nodes.GetHashCode() : 0) * 397) ^ number;
+            return ((Nodes != null ? Nodes.GetHashCode() : 0) * 397) ^ Number;
         }
     }
 

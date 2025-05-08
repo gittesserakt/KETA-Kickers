@@ -7,13 +7,13 @@ public class DungeonGraph<T> : IGraph<T>
 {
     private Dictionary<T, HashSet<T>> adjacencyList;
 
-    public bool isDirected => false;
+    public bool IsDirected => false;
 
-    public IEnumerable<T> vertices => adjacencyList.Keys;
+    public IEnumerable<T> Vertices => adjacencyList.Keys;
 
-    public IEnumerable<IEdge<T>> edges => GetEdges();
+    public IEnumerable<IEdge<T>> Edges => GetEdges();
 
-    public int verticesCount => throw new NotImplementedException();
+    public int VerticesCount => adjacencyList.Count;
 
     public DungeonGraph()
     {

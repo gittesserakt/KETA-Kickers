@@ -4,13 +4,13 @@ using UnityEngine;
 
 public interface IGraph<T>
 {
-    public bool isDirected { get; }
+    public bool IsDirected { get; }
 
-    public IEnumerable<T> vertices { get; }
+    public IEnumerable<T> Vertices { get; }
 
-    public IEnumerable<IEdge<T>> edges { get; }
+    public IEnumerable<IEdge<T>> Edges { get; }
 
-    public int verticesCount { get; }
+    public int VerticesCount { get; }
 
     public bool AddVertex(T vertex);
 

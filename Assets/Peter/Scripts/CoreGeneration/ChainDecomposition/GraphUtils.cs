@@ -16,17 +16,17 @@ public class GraphUtils
     /// <returns></returns>
     public bool IsConnected<T>(IGraph<T> graph)
     {
-        if (graph.isDirected)
+        if (graph.IsDirected)
             throw new ArgumentException("The graph must not be directed", nameof(graph));
 
         // Empty graphs are connected
-        if (graph.verticesCount == 0)
+        if (graph.VerticesCount == 0)
         {
             return true;
         }
 
         var foundVertices = new HashSet<T>();
-        var firstVertex = graph.vertices.First();
+        var firstVertex = graph.Vertices.First();
         var queue = new Queue<T>();
 
         // Run a BFS from an arbitrary initial vertex
@@ -48,7 +48,7 @@ public class GraphUtils
         }
 
         // The graph is connected if the number of found vertices is the same as the total number of vertices
-        return graph.verticesCount == foundVertices.Count;
+        return graph.VerticesCount == foundVertices.Count;
     }
 
     /// <summary>
@@ -59,10 +59,10 @@ public class GraphUtils
     /// <returns></returns>
     public bool IsPlanar<T>(IGraph<T> graph)
     {
-        if (graph.isDirected)
+        if (graph.IsDirected)
             throw new ArgumentException("The graph must not be directed", nameof(graph));
 
-        if (graph.verticesCount == 0)
+        if (graph.VerticesCount == 0)
             return true;
 
         var boyerMyrvold = new BoyerMyrvold<T>();
@@ -74,13 +74,13 @@ public class GraphUtils
     /// Gets faces of a given graph.
     /// </summary>
     /// <remarks>
-    /// Only distinct elements from each face are returned.
+    /// Only distinct elements/nodes from each face are returned.
     /// </remarks>
     /// <param name="graph"></param>
     /// <returns></returns>
     public List<List<T>> GetPlanarFaces<T>(IGraph<T> graph)
     {
-        if (graph.isDirected)
+        if (graph.IsDirected)
             throw new ArgumentException("The graph must not be directed", nameof(graph));
 
         var boyerMyrvold = new BoyerMyrvold<T>();
@@ -111,12 +111,12 @@ public class GraphUtils
     {
         var newGraph = new GraphPlanarityTesting.Graphs.DataStructures.UndirectedAdjacencyListGraph<T>();
 
-        foreach (var vertex in oldGraph.vertices)
+        foreach (var vertex in oldGraph.Vertices)
         {
             newGraph.AddVertex(vertex);
         }
 
-        foreach (var edge in oldGraph.edges)
+        foreach (var edge in oldGraph.Edges)
         {
             newGraph.AddEdge(edge.From, edge.To);
         }
