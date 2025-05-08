@@ -39,6 +39,7 @@ public class BreadthFirstChainDecomposition<TNode> : IChainDecomposition<TNode>
  
     public List<Chain<TNode>> GetChains(IGraph<TNode> graph)
     {
+        // Check whether graph is Connected and get Faces
         Initialize(graph);
 
         if (Faces.Count != 0)
@@ -46,7 +47,7 @@ public class BreadthFirstChainDecomposition<TNode> : IChainDecomposition<TNode>
             // Get faces and remove the largest one
             Faces.Remove(Faces.OrderByDescending(x => x.Count).First());
         }
-
+        // create new PartialComposition (coveredVertices, 
         var decomposition = new PartialDecomposition(Faces);
         decomposition = GetFirstComponent(decomposition);
 
@@ -376,7 +377,6 @@ public class BreadthFirstChainDecomposition<TNode> : IChainDecomposition<TNode>
         };
     }
 
-    // Check whether graph is Connected and get Faces
     private void Initialize(IGraph<TNode> graph)
     {
         if (!graphUtils.IsConnected(graph))
@@ -420,14 +420,12 @@ public class BreadthFirstChainDecomposition<TNode> : IChainDecomposition<TNode>
         private PartialDecomposition(PartialDecomposition oldDecomposition, List<TNode> chain, bool isFromFace)
         {
             coveredVertices = new Dictionary<TNode, int>(oldDecomposition.coveredVertices);
-            // Cover chain
             var numberOfChains = oldDecomposition.NumberOfChains;
             foreach (var node in chain)
             {
                 coveredVertices[node] = numberOfChains;
             }
 
-            // Remove covered faces
             remainingFaces = oldDecomposition
                 .remainingFaces
                 .Where(face => face.Any(node => !coveredVertices.ContainsKey(node)))

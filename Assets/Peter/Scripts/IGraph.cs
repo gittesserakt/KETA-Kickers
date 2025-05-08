@@ -18,7 +18,11 @@ public interface IGraph<T>
 
     public void Clear();
 
+    public bool RemoveVertex(T vertex);
 
+    public bool RemoveEdge(T from, T to);
+
+    public bool ContainsVertex(T vertex);
 
     public IEnumerable<T> GetNeighbours(T vertex);
 
